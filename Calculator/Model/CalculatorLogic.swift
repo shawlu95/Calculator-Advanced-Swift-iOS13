@@ -9,7 +9,7 @@
 import Foundation
 
 struct CalculatorLogic {
-        
+    
     private var number: Double? // global var should be private by default
     
     private var intermediateCalculation: (n1: Double, calcMethod: String)?
@@ -37,15 +37,17 @@ struct CalculatorLogic {
     }
     
     private func performTwoNumberCalculation(n2: Double) -> Double? {
-        if let n1 = intermediateCalculation?.n1, let operation = intermediateCalculation?.calcMethod {
+        
+        if let n1 = intermediateCalculation?.n1,
+           let operation = intermediateCalculation?.calcMethod {
             switch operation {
             case "+":
                 return n1 + n2
             case "-":
                 return n1 - n2
-            case "*":
+            case "×":
                 return n1 * n2
-            case "/":
+            case "÷":
                 return n1 / n2
             default:
                 fatalError("The operation passed in does not match any of the cases.")
