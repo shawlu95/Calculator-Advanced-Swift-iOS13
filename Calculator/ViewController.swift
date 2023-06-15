@@ -11,20 +11,27 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
+    var isFinishedTypingNumber: Bool = true
     
     
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
-        
-        //What should happen when a non-number button is pressed
-    
+        // start accumulating a new number
+        isFinishedTypingNumber = true
     }
 
     
     @IBAction func numButtonPressed(_ sender: UIButton) {
-        
-        //What should happen when a number is entered into the keypad
-    
+        displayLabel.text = sender.currentTitle
+        if let numValue = sender.currentTitle {
+            if isFinishedTypingNumber {
+                displayLabel.text = numValue
+                isFinishedTypingNumber = false
+            } else {
+                // accumulate number by appending
+                displayLabel.text = displayLabel.text! + numValue
+            }
+        }
     }
 
 }
