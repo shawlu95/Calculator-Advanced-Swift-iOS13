@@ -33,10 +33,12 @@ class ViewController: UIViewController {
         calculator.setNumber(displayValue)
 
         if let calcMethod = sender.currentTitle {
-            guard let result = calculator.calculate(symbol: calcMethod) else {
-                fatalError("The result of the calculation is nil.")
+            // prevent very bad thing from happen 1/10 happen. Crash if happens
+            // if let used for 9/10 chance of happening. Ignore if happens
+            if let result = calculator.calculate(symbol: calcMethod) {
+                // only update if we get a non-nil value
+                displayValue = result // unwrapped
             }
-            displayValue = result // unwrapped
         }
     }
 
