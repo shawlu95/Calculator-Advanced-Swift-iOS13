@@ -20,22 +20,23 @@ struct CalculatorLogic {
     
     mutating func calculate(symbol: String) -> Double? {
         if let n = number {
-            if symbol == "+/-" {
+            switch symbol {
+            case "+/-":
                 return n * -1
-            } else if symbol == "AC" {
+            case "AC":
                 return 0
-            } else if symbol == "%" {
+            case "%":
                 return n / 100
-            } else if symbol == "=" {
+            case "=":
                 return performTwoNumberCalculation(n2: n)
-            } else {
+            default:
                 intermediateCalculation = (n1: n, calcMethod: symbol)
             }
         }
         return nil // deal with optional on client side
     }
     
-    private func performTwoNumberCalculation(n2: Double) -> Double {
+    private func performTwoNumberCalculation(n2: Double) -> Double? {
         if let n1 = intermediateCalculation?.n1, let operation = intermediateCalculation?.calcMethod {
             switch operation {
             case "+":
