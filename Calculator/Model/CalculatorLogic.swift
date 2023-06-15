@@ -8,25 +8,23 @@
 
 import Foundation
 
-class CalculatorLogic {
+struct CalculatorLogic {
         
-    private var number: Double
+    private var number: Double? // global var should be private by default
     
-    init(number: Double) {
-        self.number = number
-    }
-    
-    func setNumber(_ number: Double) {
+    mutating func setNumber(_ number: Double) {
         self.number = number
     }
     
     func calculate(symbol: String) -> Double? {
-        if symbol == "+/-" {
-            return number * -1
-        } else if symbol == "AC" {
-            return 0
-        } else if symbol == "%" {
-            return number / 100
+        if let n = number {
+            if symbol == "+/-" {
+                return n * -1
+            } else if symbol == "AC" {
+                return 0
+            } else if symbol == "%" {
+                return n / 100
+            }
         }
         return nil // deal with optional on client side
     }
